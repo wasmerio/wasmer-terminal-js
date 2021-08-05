@@ -1,0 +1,48 @@
+[package]
+name = "wasmer-terminal-js"
+version = "0.1.0"
+authors = ["Syrus Akbary <syrus@wasmer.io>"]
+edition = "2018"
+publish = false
+
+[dependencies]
+xterm-js-sys = { version = "4.6.0-alpha1" }
+# wasmer = { version = "2.0.0", path = "../../../wasmer/lib/api", default-features = false, features = ["js-default", "wat"] }
+# wasmer-wasi = { version = "2.0.0", path = "../../../wasmer/lib/wasi", default-features = false, features = ["js", "mem_fs"] }
+wasmer = { version = "2.0.0", git = "https://github.com/wasmerio/wasmer", branch = "js-api-wasi", default-features = false, features = ["js-default", "wat"] }
+wasmer-wasi = { version = "2.0.0", git = "https://github.com/wasmerio/wasmer", branch = "js-api-wasi", default-features = false, features = ["js", "mem_fs"] }
+wasm-bindgen = "0.2.63"
+console_error_panic_hook = "0.1.5"
+js-sys = "0.3.37"
+
+[dependencies.web-sys]
+version = "0.3.37"
+features = [
+  'console',
+  'Document',
+  'Element',
+  'Node',
+  'NodeList',
+  'Window',
+]
+
+
+[lib]
+crate-type = ["cdylib"]
+
+
+[package.metadata.wasm-pack.profile.dev.wasm-bindgen]
+debug-js-glue = true
+demangle-name-section = true
+dwarf-debug-info = true
+
+[package.metadata.wasm-pack.profile.release]
+# The version of wasm-opt that wasm-pack bundles crashes on current wasm-bindgen
+# .wasm files. Current wasm-opt (version 93) crashes on the DWARF info that
+# wasm-bindgen produces. So, we'll just disable wasm-opt for now.
+wasm-opt = false #["-O4"]
+
+[package.metadata.wasm-pack.profile.release.wasm-bindgen]
+debug-js-glue = false
+demangle-name-section = false
+dwarf-debug-info = false

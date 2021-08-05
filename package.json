@@ -1,0 +1,22 @@
+{
+  "name": "wasmer-terminal-js",
+  "version": "0.0.0",
+  "main": "index.js",
+  "author": "Syrus Akbary <syrus@wasmer.io>",
+  "license": "MIT",
+  "scripts": {
+    "watch": "parcel index.html",
+    "release": "WASM_PACK_PROFILE=release NODE_ENV=production parcel build index.html",
+    "//": "drop WASM_PACK_PROFILE=release when (if) things get merged"
+  },
+  "dependencies": {
+    "xterm": "^4.13.0",
+    "xterm-addon-fit": "^0.3.0",
+    "xterm-addon-web-links": "^0.3.0"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-wasm.rs": "github:rrbutani/parcel-plugin-wasm.rs",
+    "typescript": "^3.9.5"
+  }
+}
